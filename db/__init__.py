@@ -1,1 +1,1 @@
-from db.db_connection import connection as DbConnection
+from .database import SQLModel,engine
