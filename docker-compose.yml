@@ -11,6 +11,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME}
+    networks:
+      - net-fernando
   phpAdmin:
     depends_on:
       - db
@@ -20,6 +22,8 @@ services:
       - '8081:80'
     environment:
       - PMA_HOST=db
+    networks:
+      - net-fernando
   api_fernando:
     depends_on:
       - db
@@ -30,7 +34,26 @@ services:
       - '3000:3000'
     environment:
       - URL_MYSQL=mysql+pymysql://root:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+    networks:
+      - net-fernando
+    restart: on-failure
+  web:
+    depends_on:
+      - api_fernando
+    image: foro:0.5.0
+    container_name: foro_fernando
+    ports:
+      - "4000:5173"
+    environment:
+      - PORT=5173
+      - ORIGIN=http://localhost:4000
+      - PUBLIC_DOMAIN=api_fernando
+    networks:
+      - net-fernando
     restart: on-failure
 volumes:
   db-fernando:
+    external: true
+networks:
+  net-fernando:
     external: true
