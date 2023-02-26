@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    container_name: mysql
+    image: mysql:debian
+    volumes:
+      - db-fernando:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+  phpAdmin:
+    depends_on:
+      - db
+    container_name: phpMyAdmin
+    image: phpmyadmin:latest
+    ports:
+      - '8081:80'
+    environment:
+      - PMA_HOST=db
+  api_fernando:
+    depends_on:
+      - db
+      - phpAdmin
+    container_name: api_sql
+    image: flaviodev99/foro-fernando-test:0.0.1
+    ports:
+      - '3000:3000'
+    environment:
+      - URL_MYSQL=mysql+pymysql://root:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+    restart: on-failure
+volumes:
+  db-fernando:
+    external: true
