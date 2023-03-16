@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import os
 
 from fastapi import APIRouter, Depends, HTTPException, Path, status
 from fastapi.responses import JSONResponse
@@ -18,7 +19,7 @@ context = CryptContext(schemes=['bcrypt'])
 router = APIRouter(prefix='/students', tags=['students'])
 
 # Añadiremos un secrete para proporcionarle más seguridad al jwt => openssl rand -hex 32 en linux 
-SECRET = '37d7191d769d06b3139165f7c5950f612880a005c76b5e9aa7c6b064e2982838'
+SECRET = os.getenv('SECRET')
 # Tiempo de expiración para el token
 TIME_EXPIRES_TOKEN = 30
 # Añadimos el algoritmo que usa jwt
