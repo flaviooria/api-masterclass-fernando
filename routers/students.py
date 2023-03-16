@@ -97,7 +97,8 @@ def login(*, db: Session = Depends(getSession),form: StudentAuth):
     if not context.verify(form.password, user_in_db.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail='Password incorrect')
     # Paso 2 Generamos un token
-    expiration = datetime.now() + timedelta(TIME_EXPIRES_TOKEN)
+    expiration = datetime.utcnow() + timedelta(minutes=TIME_EXPIRES_TOKEN)
+    print(expiration)
 
     access_token = { 'sub': form.email, 'exp': expiration }
     token = jwt.encode(access_token,SECRET,ALGORITHM)
