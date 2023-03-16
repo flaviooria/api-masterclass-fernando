@@ -1,3 +1,2 @@
 .vscode/
-__pycache__
-mysql-data
+__pycache__/

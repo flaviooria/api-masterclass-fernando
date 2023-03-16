@@ -20,6 +20,7 @@ class StudentUpdate(SQLModel):
     surname: str | None
     email: str | None
     avatar: str | None
+    password: str | None
 
 
 class StudenBase(SQLModel):
@@ -30,6 +31,7 @@ class StudenBase(SQLModel):
 
 class StudentResponse(StudenBase):
     id: int
+    password: str | None
 
 class StudentMe(BaseModel):
     id: int
