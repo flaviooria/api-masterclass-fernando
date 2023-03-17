@@ -1,15 +1,17 @@
-# Temaplate Masterclass I.E.S Fernando III with FastApi 
+# Masterclass I.E.S Fernando III with FastApi 
 ---
 
-### Requirements
-    - python -m venv env
-    # In the terminal
-    - source env/bin/activate in linux/mac
-    - env/Scripts/activate.bat
+## Requerimientos
+    python -m venv env
+### En la terminal de linux/mac
+    source env/bin/activate 
+### En la terminal de windows
+    env/Scripts/activate
 
-    # inside the projet run
-    - pip install -r requirements.txt
+### Te ubicas dentro de la carpeta y abres la terminal y ejecutas:
+- pip install -r requirements.txt
 
 
-### Run project
-    - uvicorn main:app --reload --port 3000
+### Ejecutar proyecto
+    uvicorn main:app --reload --port 3000
+

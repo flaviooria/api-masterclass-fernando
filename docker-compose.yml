@@ -40,7 +40,7 @@ services:
   web:
     depends_on:
       - api_fernando
-    image: foro:0.5.0
+    image: foro:0.5.4
     container_name: foro_fernando
     ports:
       - "4000:5173"
