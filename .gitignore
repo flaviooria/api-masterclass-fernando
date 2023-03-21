@@ -221,3 +221,4 @@ poetry.toml
 # docker
 docker-compose.yml
 Dockerfile
+.dockerignore
